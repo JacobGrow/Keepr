@@ -21,9 +21,24 @@ namespace Keepr.Repositories
             return _db.Query<Keep>(sql);
         }
 
-        internal Keep Create(Keep KeepData)
+    internal Keep GetKeepsByUserId(string userId)
+    {
+      throw new NotImplementedException();
+    }
+
+    internal Keep GetById(int id)
+    {
+      throw new NotImplementedException();
+    }
+
+    internal Keep Create(Keep KeepData)
         {
             throw new NotImplementedException();
         }
+
+    internal bool Delete(int id, string userId)
+    {
+      throw new NotImplementedException();
     }
+  }
 }
