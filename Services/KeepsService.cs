@@ -18,7 +18,7 @@ namespace Keepr.Services
       return _repo.Get();
     }
 
-    internal Keep GetByUserId(string userId)
+    internal IEnumerable<Keep> GetByUserId(string userId)
     {
       return _repo.GetKeepsByUserId(userId);
     }

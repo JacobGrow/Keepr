@@ -53,7 +53,7 @@ namespace Keepr.Controllers
         {
               try
             {
-                return Ok(_ks.GetById());
+                return Ok(_ks.GetById(id));
             }
             catch (Exception e)
             {
