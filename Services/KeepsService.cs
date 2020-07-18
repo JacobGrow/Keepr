@@ -22,5 +22,25 @@ namespace Keepr.Services
         {
             return _repo.Create(newKeep);
         }
+
+    internal object GetById()
+    {
+      throw new NotImplementedException();
     }
+
+    internal object GetByUserId(string userId)
+    {
+      throw new NotImplementedException();
+    }
+
+    internal object Edit(object keepToUpdate, string userId)
+    {
+      throw new NotImplementedException();
+    }
+
+    internal object Delete(int id, string userId)
+    {
+      throw new NotImplementedException();
+    }
+  }
 }
