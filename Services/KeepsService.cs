@@ -31,6 +31,7 @@ namespace Keepr.Services
       }
       return foundKeep;
     }
+
     internal Keep Create(Keep newKeep)
     {
       return _repo.Create(newKeep);
@@ -38,10 +39,15 @@ namespace Keepr.Services
 
 
 
-    internal Keep Edit(object keepToUpdate, string userId)
-    {
-     //NOTE Figure this out.
-    }
+    // internal Keep Edit(Keep keepToUpdate, string userId)
+    // {
+    //  Keep foundKeep = GetById(keepToUpdate.Id);
+    //  if (foundKeep.UserId != userId)
+    //  {
+    //    throw new Exception("Whatever");
+    //  }
+    //  return _repo.Edit(foundKeep);
+    // }
 
     internal string Delete(int id, string userId)
     {

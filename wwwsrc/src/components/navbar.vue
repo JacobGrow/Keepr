@@ -1,6 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" :to="{ name: 'home' }">Keepr</router-link>
+  <nav class="navbar navbar-expand-lg navbar-light bg-red">
+    <router-link class="navbar-brand" :to="{ name: 'home' }">
+      <h1 class="d-flex mt-3">
+      K
+      </h1>
+      </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -15,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" :class="{ active: $route.name == 'home' }">
-          <router-link :to="{ name: 'home' }" class="nav-link"
+          <router-link :to="{ name: 'home' }" class="nav-link mt-3 ml-3"
             >Home</router-link
           >
         </li>
@@ -24,14 +28,14 @@
           v-if="$auth.isAuthenticated"
           :class="{ active: $route.name == 'dashboard' }"
         >
-          <router-link class="nav-link" :to="{ name: 'dashboard' }"
+          <router-link class="nav-link mt-3 ml-3" :to="{ name: 'dashboard' }"
             >My-Dashboard</router-link
           >
         </li>
       </ul>
       <span class="navbar-text">
         <button
-          class="btn btn-success"
+          class="btn btn-primary"
           @click="login"
           v-if="!$auth.isAuthenticated"
         >
@@ -67,4 +71,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.bg-red{
+  background-color: #ac5061;
+}
+
+nav {
+  font-family: 'Old Standard TT', serif;
+  font-size: large;
+}
+
+
+</style>
