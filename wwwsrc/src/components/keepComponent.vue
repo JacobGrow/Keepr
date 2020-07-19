@@ -1,13 +1,12 @@
 <template>
   <div class="keep">
-    <div class="card-columns">
-
-      <div class="card">
-        {{keepData.name}}
+  
+      <div class="card shadow card-size">
        <img :src = "keepData.img" >
-        {{keepData.description}}
+        <h5> {{keepData.name}} </h5>
+       <h5> {{keepData.description}} </h5>
+    
       </div>
-    </div>
     </div>
 </template>
 
@@ -19,6 +18,15 @@ export default {
 </script>
 
 <style scoped>
+.card-size{
+  max-height: 200px;
+  max-width: 200px;
+  padding: 5px;
+}
 
 
+img{
+  width: 100%;
+  height: 100%;
+}
 </style>

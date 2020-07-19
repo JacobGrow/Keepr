@@ -34,17 +34,24 @@
   </div>
   </div>
 </div>
-  <div class="row">
-    
+<div class="row mt-3">
+  <div class="col-12">
+
+<div class="card-columns">
 
     <keep v-for="keep in keeps" :key="keep.id" :keepData="keep"/>
-   
-    
   </div>
 </div>
 </div>
+    
+  </div>
+
+   
+    
+  
 </div>
-      </div>
+</div>
+</div>
 </template>
 
 <script>
@@ -82,4 +89,8 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.card-columns{ column-count: 4; }
+</style>
 
