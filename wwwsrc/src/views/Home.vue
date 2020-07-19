@@ -14,7 +14,7 @@
 <div class="card shadow">
     <div class="row justify-content-center">
       <div class="col-10">
-<form action="submit" @submit.prevent="addKeep">
+<form action="submit" @submit="addKeep">
   <div class="row ml-3 my-1">
   <input class="form-control form-inline" type="text" placeholder="Title" v-model="newKeep.name">
   </div>
@@ -91,6 +91,6 @@ export default {
 </script>
 
 <style scoped>
-.card-columns{ column-count: 4; }
+.card-columns{ column-count: 5; }
 </style>
 

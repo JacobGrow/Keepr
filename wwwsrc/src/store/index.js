@@ -32,7 +32,6 @@ export default new Vuex.Store({
       api.defaults.headers.authorization = "";
     },
     async getKeeps({ commit, dispatch }) {
-      api.get('keeps')
        try {
          let res = await api.get("keeps");
          commit("setKeeps", res.data)
@@ -40,9 +39,9 @@ export default new Vuex.Store({
          console.error(error)
     }
     },
-    async  addKeep({ dispatch }, keepData) {
+    async  addKeep({ dispatch }, newKeep) {
       try {
-        let res = await api.post("keeps", keepData)
+        let res = await api.post("keeps", newKeep)
         dispatch('getKeeps')
       } catch (error) {
         console.error(error)

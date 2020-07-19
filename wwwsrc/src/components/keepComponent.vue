@@ -5,6 +5,7 @@
        <img :src = "keepData.img" >
         <h5> {{keepData.name}} </h5>
        <h5> {{keepData.description}} </h5>
+       <i class="fa fa-trash text-danger" aria-hidden="true"></i>
     
       </div>
     </div>
@@ -19,8 +20,6 @@ export default {
 
 <style scoped>
 .card-size{
-  max-height: 200px;
-  max-width: 200px;
   padding: 5px;
 }
 
