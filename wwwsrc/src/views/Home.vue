@@ -7,11 +7,11 @@
 
 <button type="button" class="btn btn-primary" @click="showForm=!showForm"> Make a Keep
 </button>
-<div class="row justify-content-center">
+<div class="row justify-content-center"  v-if="showForm">
   <div class="col-6">
 
 
-<div class="card shadow" v-if="showForm">
+<div class="card shadow">
     <div class="row justify-content-center">
       <div class="col-10">
 <form action="submit" @submit.prevent="addKeep">
@@ -32,19 +32,15 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <keeps v-for="keep in keeps" :key="keep.id" :keep="keep"/>
-    <div class="col">
-
-    <div class="card">
-      {{newKeep.name}}
-    {{newKeep.img}}
-    {{newKeep.description}}
-    </div>
-    </div>
-  </div>
   </div>
 </div>
+  <div class="row">
+    
+
+    <keep v-for="keep in keeps" :key="keep.id" :keepData="keep"/>
+   
+    
+  </div>
 </div>
 </div>
 </div>
@@ -52,17 +48,14 @@
 </template>
 
 <script>
+import Keep from "@/components/keepComponent.vue"
 export default {
-  name: "home",
+  name: "Home",
   data()
   {
     return {
       showForm: false,
-      newKeep: {
-        name: "",
-        description: "",
-        img: ""
-      }
+      newKeep: {}
     }
   },
   computed: {
@@ -79,11 +72,13 @@ export default {
     },
     addKeep(){
       this.$store.dispatch("addKeep", this.newKeep);
-      this.newKeep = {name: "", description: "", img: ""}
     }
   },
   mounted(){
     this.$store.dispatch("getKeeps");
+  },
+  components: {
+   Keep
   }
 };
 </script>

@@ -43,7 +43,7 @@ export default new Vuex.Store({
     async  addKeep({ dispatch }, keepData) {
       try {
         let res = await api.post("keeps", keepData)
-        dispatch('setKeeps')
+        dispatch('getKeeps')
       } catch (error) {
         console.error(error)
       }
