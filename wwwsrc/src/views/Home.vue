@@ -14,22 +14,33 @@
 <div class="card shadow" v-if="showForm">
     <div class="row justify-content-center">
       <div class="col-10">
-<form action="submit">
+<form action="submit" @submit.prevent="addKeep">
   <div class="row ml-3 my-1">
-  <input class="form-control form-inline" type="text" placeholder="Title">
+  <input class="form-control form-inline" type="text" placeholder="Title" v-model="newKeep.name">
   </div>
   <div class="row ml-3 my-1">
-  <input class="form-control" type="text" placeholder="Image URL">
+  <input class="form-control" type="text" placeholder="Image URL" v-model="newKeep.img"> 
   </div>
   <div class="row ml-3 my-1">
- <input type="text" class="form-control" placeholder="Description...">
+ <input type="text" class="form-control" placeholder="Description..." v-model="newKeep.description">
   </div>
  
   
-  <button type="button" class="btn btn-primary">Submit Keep</button>
+  <button type="submit" class="btn btn-primary">Submit Keep</button>
   <button type="button" class="btn btn-danger">Cancel</button>
 </form>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <keeps v-for="keep in keeps" :key="keep.id" :keep="keep"/>
+    <div class="col">
+
+    <div class="card">
+      {{newKeep.name}}
+    {{newKeep.img}}
+    {{newKeep.description}}
+    </div>
     </div>
   </div>
   </div>
@@ -46,24 +57,34 @@ export default {
   data()
   {
     return {
-      showForm: false
+      showForm: false,
+      newKeep: {
+        name: "",
+        description: "",
+        img: ""
+      }
     }
   },
   computed: {
     user() {
       return this.$store.state.user;
     },
+    keeps() {
+      return this.$store.state.publicKeeps;
+    }
   },
   methods: {
     logout() {
       this.$store.dispatch("logout");
+    },
+    addKeep(){
+      this.$store.dispatch("addKeep", this.newKeep);
+      this.newKeep = {name: "", description: "", img: ""}
     }
+  },
+  mounted(){
+    this.$store.dispatch("getKeeps");
   }
 };
 </script>
 
-<style scoped>
-textarea{
-  height: auto;
-}
-</style>
