@@ -1,6 +1,10 @@
 <template>
-  <div class="dashboard">
-    <h1>WELCOME TO THE DASHBOARD</h1>
+  <div class="dashboard container-fluid">
+    <div class="row">
+      <div class="col">
+    <h1 class="text-center">WELCOME TO THE DASHBOARD</h1>
+      </div>
+    </div>
     public {{ publicKeeps }} user {{ userKeeps }}
   </div>
 </template>

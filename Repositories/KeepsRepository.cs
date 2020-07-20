@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using Keepr.Models;
 using Dapper;
+using Keepr.Services;
 
 namespace Keepr.Repositories
 {
@@ -27,9 +28,10 @@ namespace Keepr.Repositories
     }
     internal IEnumerable<Keep> Get()
     {
-      string sql = "SELECT * FROM Keeps;";
+    //   string sql = "SELECT * FROM keeps;";
+      string sql = "SELECT * FROM Keeps WHERE isPrivate = 0";
       return _db.Query<Keep>(sql);
-      // string sql = "SELECT * FROM Keeps WHERE isPrivate = 0;";
+      //NOTE why is isPrivate breaking it?
     }
 
 
@@ -46,10 +48,19 @@ namespace Keepr.Repositories
      return newKeep;
     }
 
-    // internal bool Edit(Keep keepToUpdate, string userId)
-    // {
-    //   return false;
-    // }
+    internal Keep IncrementKeeps(Keep keepToUpdate)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET
+        keeps = @Keeps
+      WHERE id = @Id;";
+      return _db.QueryFirstOrDefault<Keep>(sql, keepToUpdate);
+
+
+      // int affectedRows = _db.Execute(sql, keepToUpdate);
+      // return affectedRows == 1;
+    }
 
     internal bool Delete(int id, string userId)
     {

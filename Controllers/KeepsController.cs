@@ -61,6 +61,7 @@ namespace Keepr.Controllers
       };
     }
 
+
     [HttpPost]
     [Authorize]
     public ActionResult<Keep> Post([FromBody] Keep newKeep)
@@ -77,21 +78,21 @@ namespace Keepr.Controllers
       }
     }
 
-    // [HttpPut("{id}")]
-    // [Authorize]
-    // public ActionResult<Keep> Edit(int id, [FromBody] Keep keepToUpdate)
-    // {
-    //      try
-    //     {
-    //         keepToUpdate.Id = id;
-    //         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-    //         return Ok(_ks.Edit(keepToUpdate, userId));
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         return BadRequest(e.Message);
-    //     }
-    // }
+    [HttpPut("{id}")]
+    [Authorize]
+    public ActionResult<Keep> Edit(int id, [FromBody] Keep keepToUpdate)
+    {
+         try
+        {
+            keepToUpdate.Id = id;
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return Ok(_ks.Edit(keepToUpdate, userId));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 
     [HttpDelete("{id}")]
     [Authorize]

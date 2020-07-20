@@ -39,15 +39,15 @@ namespace Keepr.Services
 
 
 
-    // internal Keep Edit(Keep keepToUpdate, string userId)
-    // {
-    //  Keep foundKeep = GetById(keepToUpdate.Id);
-    //  if (foundKeep.UserId != userId)
-    //  {
-    //    throw new Exception("Whatever");
-    //  }
-    //  return _repo.Edit(foundKeep);
-    // }
+    internal Keep Edit(Keep keepToUpdate, string userId)
+    {
+     Keep foundKeep = GetById(keepToUpdate.Id);
+        keepToUpdate.Keeps = foundKeep.Keeps + 1;
+        return _repo.IncrementKeeps(keepToUpdate);
+     
+     
+      // return _repo.IncrementKeeps(keepToUpdate);
+    }
 
     internal string Delete(int id, string userId)
     {
