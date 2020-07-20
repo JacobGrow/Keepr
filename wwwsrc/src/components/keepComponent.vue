@@ -5,7 +5,7 @@
        <img :src = "keepData.img" >
         <h5> {{keepData.name}} </h5>
        <h5> {{keepData.description}} </h5>
-       <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+       <button class="btn btn-danger" @click="deleteKeep">DELORT</button>
     
       </div>
     </div>
@@ -14,7 +14,12 @@
 <script>
 export default {
   name: "Keep",
-  props: ["keepData"]
+  props: ["keepData"],
+  methods: {
+    deleteKeep() {
+      this.$store.dispatch("deleteKeep", this.id)
+    }
+  }
 };
 </script>
 
