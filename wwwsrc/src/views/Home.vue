@@ -14,7 +14,7 @@
 <div class="card shadow">
     <div class="row justify-content-center">
       <div class="col-10">
-<form action="submit" @submit="addKeep">
+<form action="submit" @submit.prevent="addKeep">
   <div class="row ml-3 my-1">
   <input class="form-control form-inline" type="text" placeholder="Title" v-model="newKeep.name">
   </div>
@@ -62,7 +62,11 @@ export default {
   {
     return {
       showForm: false,
-      newKeep: {}
+      newKeep: {
+        name: "",
+        description:"",
+        img:""
+      }
     }
   },
   computed: {
@@ -79,6 +83,7 @@ export default {
     },
     addKeep(){
       this.$store.dispatch("addKeep", this.newKeep);
+      newKeep = {};
     }
   },
   mounted(){
