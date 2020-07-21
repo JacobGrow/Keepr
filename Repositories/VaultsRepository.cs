@@ -36,16 +36,16 @@ namespace keepr.Repositories
       return _db.Query<Vault>(sql);
     }
 
-    internal Vault Create(Vault newVault)
+    internal int Create(Vault newVault)
     {
      string sql = @"
      INSERT INTO vaults
-     (userId, name, description)
+     (name, description, userId)
      VALUES
-     (@UserId, @Name, @Description);
+     (@Name, @Description, @UserId);
      SELECT LAST_INSERT_ID()";
-     newVault.Id = _db.ExecuteScalar<int>(sql, newVault);
-     return newVault;
+      return _db.ExecuteScalar<int>(sql, newVault);
+    
     }
 
     internal Vault Edit(Vault original)
