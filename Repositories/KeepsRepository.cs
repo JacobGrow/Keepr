@@ -48,19 +48,33 @@ namespace Keepr.Repositories
      return newKeep;
     }
 
-    internal Keep IncrementKeeps(Keep keepToUpdate)
+    internal bool IncrementKeeps(Keep keepToUpdate)
     {
       string sql = @"
       UPDATE keeps
       SET
         keeps = @Keeps
       WHERE id = @Id;";
-      return _db.QueryFirstOrDefault<Keep>(sql, keepToUpdate);
+      // return _db.QueryFirstOrDefault<Keep>(sql, keepToUpdate);
 
 
-      // int affectedRows = _db.Execute(sql, keepToUpdate);
-      // return affectedRows == 1;
+      int affectedRows = _db.Execute(sql, keepToUpdate);
+      return affectedRows == 1;
     }
+
+            internal bool Edit(Keep keepToUpdate, string userId)
+        {
+            keepToUpdate.UserId = userId;
+            string sql = @"
+            UPDATE keeps
+            SET
+             description = @Description,
+             name = @Name
+            WHERE id = @Id
+            AND userId = @UserId";
+            int affectedRows = _db.Execute(sql, keepToUpdate);
+            return affectedRows == 1;
+        }
 
     internal bool Delete(int id, string userId)
     {

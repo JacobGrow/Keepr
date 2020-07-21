@@ -38,16 +38,47 @@ namespace Keepr.Services
     }
 
 
+        internal Keep Edit(Keep keepToUpdate, string userId)
+        {
+            Keep foundKeep = GetById(keepToUpdate.Id);
+            // NOTE Check if not the owner, and price is increasing
+            if (foundKeep.UserId != userId && foundKeep.Keeps < keepToUpdate.Keeps)
+            {
+                if (_repo.IncrementKeeps(keepToUpdate))
+                {
+                    keepToUpdate.Keeps = foundKeep.Keeps;
+                    return keepToUpdate;
+                }
+                throw new Exception("Could not bid on that car");
+            }
+            if (foundKeep.UserId == userId && _repo.Edit(keepToUpdate, userId))
+            {
+                return keepToUpdate;
+            }
+            throw new Exception("You cant edit that, it is not yo car!");
+        }
 
-    internal Keep Edit(Keep keepToUpdate, string userId)
-    {
-     Keep foundKeep = GetById(keepToUpdate.Id);
-        keepToUpdate.Keeps = foundKeep.Keeps + 1;
-        return _repo.IncrementKeeps(keepToUpdate);
-     
-     
-      // return _repo.IncrementKeeps(keepToUpdate);
-    }
+    // internal Keep Edit(Keep keepToUpdate, string userId)
+    // {
+    //   Keep foundKeep = GetById(keepToUpdate.Id);
+    //   if (foundKeep.Keeps < keepToUpdate.Keeps)
+    //   {
+    //     if (_repo.IncrementKeeps(keepToUpdate))
+    //     {
+    //     keepToUpdate.Keeps = foundKeep.Keeps + 1;
+    //     return keepToUpdate;
+    //     // return _repo.IncrementKeeps(keepToUpdate);  
+    //     }
+    //       throw new Exception(
+    //         "You can't keep this.");
+    //   }
+    //   if (foundKeep.UserId == userId)
+    //   {
+    //     return keepToUpdate;
+    //   }
+    //   throw new Exception("You can't edit this keep.");
+    //   // return _repo.IncrementKeeps(keepToUpdate);
+    // }
 
     internal string Delete(int id, string userId)
     {
