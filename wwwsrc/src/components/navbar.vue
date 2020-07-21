@@ -29,7 +29,7 @@
           :class="{ active: $route.name == 'dashboard' }"
         >
           <router-link class="nav-link mt-3 ml-3" :to="{ name: 'dashboard' }"
-            >My-Dashboard</router-link
+            >My Vaults</router-link
           >
         </li>
       </ul>

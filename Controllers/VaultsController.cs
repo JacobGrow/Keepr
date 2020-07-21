@@ -20,6 +20,18 @@ namespace keepr.Controllers
       _vs = vs;
     }
 
+  [HttpGet]
+        public ActionResult<IEnumerable<Vault>> GetAll()
+        {
+            try
+            {
+                return Ok(_vs.GetAll());
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
     [HttpGet("user")]
     [Authorize]
     public ActionResult<IEnumerable<Vault>> GetVaultsByUser()

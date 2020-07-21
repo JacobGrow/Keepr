@@ -14,6 +14,10 @@ namespace keepr.Services
     {
       _repo = repo;
     }
+    internal IEnumerable<Vault> GetAll()
+    {
+      return _repo.GetAll();
+    }
     internal IEnumerable<Vault> GetByUserId(string userId)
     {
        return _repo.GetVaultsByUserId(userId);
@@ -28,11 +32,11 @@ namespace keepr.Services
       }
       return foundVault;
     }
-   
 
-    internal Vault Create(Vault newVault)
+
+    public Vault Create(Vault newVault)
     {
-      return _repo.Create(newVault);
+     return _repo.Create(newVault);
     }
 
       public Vault Edit(Vault editVault)
