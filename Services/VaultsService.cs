@@ -46,18 +46,19 @@ namespace keepr.Services
       original.Description = editVault.Description == null ? original.Description : editVault.Description;
       return _repo.Edit(original);
     }
-   public string Delete(int id, string userId)
+
+    internal string Delete(int id, string userId)
     {
-     Vault foundVault = GetById(id);
-            if (foundVault.UserId != userId)
-            {
-                throw new Exception("This is not your vault!");
-            }
-            if (_repo.Delete(id, userId))
-            {
-                return "Sucessfully delorted.";
-            }
-            throw new Exception("Somethin bad happened");
+      Vault foundVault = GetById(id);
+      if (foundVault.UserId != userId)
+      {
+        throw new Exception("This is not your keep!");
+      }
+      if (_repo.Delete(id, userId))
+      {
+        return "Successfully Deleted.";
+      }
+      throw new Exception("Something didn't work.");
     }
 
   }

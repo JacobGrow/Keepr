@@ -60,11 +60,12 @@ namespace keepr.Repositories
      return _db.QueryFirstOrDefault<Vault>(sql, original);
     }
 
+
     internal bool Delete(int id, string userId)
     {
-     string sql = "DELETE FROM vaults WHERE id = @id AND userId = @userId LIMIT 1";
-            int affectedRows = _db.Execute(sql, new { id, userId });
-            return affectedRows == 1;
+     string sql="DELETE FROM vaults WHERE id = @Id AND userId = @UserId LIMIT 1";
+     int affectedRows = _db.Execute(sql, new { id, userId });
+     return affectedRows == 1;
     }
   }
 }
