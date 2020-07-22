@@ -1,7 +1,9 @@
 <template>
   <div class="keep">
     <div class="card shadow card-size">
+         <router-link :to="{name: 'keepDetails', params: {keepId: keepData.id}}">
       <img :src="keepData.img" />
+         </router-link>
       <h5>{{keepData.name}}</h5>
       <h5>{{keepData.description}}</h5>
       <button class="btn btn-danger" @click="deleteKeep(keepData.id)">DELORT</button>
@@ -10,6 +12,7 @@
 </template>
 
 <script>
+import keepDetails from "@/views/KeepDetails.vue"
 export default {
   name: "Keep",
   props: ["keepData"],
