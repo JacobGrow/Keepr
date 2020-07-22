@@ -19,6 +19,19 @@ namespace keepr.Repositories
       return _db.QueryFirstOrDefault<DTOVaultKeep>(sql, new { Id });
     }
 
+    internal IEnumerable<VaultKeepViewModel> GetByUser(string userId)
+    {
+      string sql = @"
+            SELECT
+            k.*,
+            vk.id as vaultKeepId
+            FROM vaultkeeps vk
+            INNER JOIN vaults v ON v.id = vk.vaultId
+            WHERE userId = @userId;";
+
+            return _db.Query<VaultKeepViewModel>(sql, new { userId });
+    }
+
     internal int Create(DTOVaultKeep newDTOVaultKeep)
     {
       string sql = @"

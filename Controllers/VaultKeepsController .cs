@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using keepr.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -15,6 +16,19 @@ namespace keepr.Services
     {
       _vks = vks;
     }
+
+    public ActionResult<IEnumerable<VaultKeepViewModel>> Get()
+        {
+            try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_vks.Get(userId));
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
 
     //Post
     [HttpPost]

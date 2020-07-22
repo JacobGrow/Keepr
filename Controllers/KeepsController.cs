@@ -21,16 +21,17 @@ namespace Keepr.Controllers
       _ks = ks;
     }
     [HttpGet]
-    public ActionResult<IEnumerable<Keep>> Get()
+    public ActionResult<IEnumerable<Keep>> GetPublic(int id)
     {
       try
       {
-        return Ok(_ks.Get());
+
+        return Ok(_ks.GetPublic());
       }
       catch (Exception e)
       {
         return BadRequest(e.Message);
-      };
+      }
     }
 
     [HttpGet("user")]

@@ -24,6 +24,12 @@
   <div class="row ml-3 my-1">
  <input type="text" class="form-control" placeholder="Description..." v-model="newKeep.description">
   </div>
+  <div class="form-check">
+  <input class="form-check-input pb-0" type="checkbox" value="" id="defaultCheck1" v-model="newKeep.isPrivate">
+  <label class="form-check-label" for="defaultCheck1">
+    <p class="mb-0">Private?</p>
+  </label>
+</div>
  
   
   <button type="submit" class="btn btn-primary">Submit Keep</button>
@@ -63,9 +69,7 @@ export default {
     return {
       showForm: false,
       newKeep: {
-        name: "",
-        description:"",
-        img:""
+      
       }
     }
   },

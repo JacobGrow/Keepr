@@ -32,6 +32,15 @@
             >My Vaults</router-link
           >
         </li>
+         <li
+          class="nav-item"
+          v-if="$auth.isAuthenticated"
+          :class="{ active: $route.name == 'myKeeps' }"
+        >
+          <router-link class="nav-link mt-3 ml-3" :to="{ name: 'myKeeps' }"
+            >My Keeps</router-link
+          >
+        </li>
       </ul>
       <span class="navbar-text">
         <button
@@ -79,6 +88,7 @@ export default {
 nav {
   font-family: 'Old Standard TT', serif;
   font-size: large;
+  position: fixed;
 }
 
 
