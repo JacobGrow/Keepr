@@ -11,7 +11,7 @@ namespace keepr.Repositories
     private readonly IDbConnection _db;
     public VaultKeepsRepository(IDbConnection db)
     {
-        _db = db;
+      _db = db;
     }
     internal DTOVaultKeep GetById(int Id)
     {
@@ -21,7 +21,7 @@ namespace keepr.Repositories
 
     internal int Create(DTOVaultKeep newDTOVaultKeep)
     {
-       string sql = @"
+      string sql = @"
         INSERT INTO vaultkeeps
         (vaultId, keepId, userId)
         VALUES
@@ -32,20 +32,20 @@ namespace keepr.Repositories
 
     internal void Delete(int Id)
     {
-       string sql = "DELETE FROM vaultkeeps WHERE id = @Id";
+      string sql = "DELETE FROM vaultkeeps WHERE id = @Id";
       _db.Execute(sql, new { Id });
     }
 
     internal IEnumerable<VaultKeep> GetKeepsByVaultId(int id)
     {
-        string sql = @"
-        SELECT 
-            k.*
+      string sql = @"
+           SELECT 
+            k.*,
             vk.id as vaultKeepId
-        FROM vaultkeeps vk
-        INNER JOIN keeps k ON k.id = vk.keepId
-        WHERE(vk.vaultId = @id)";
-        return _db.Query<VaultKeep>(sql, new { id });
+            FROM vaultkeeps vk
+            INNER JOIN keeps k ON k.id = vk.keepId 
+            WHERE (vaultId = @vaultId AND vk.userId = @userId)";
+          return _db.Query<VaultKeep>(sql, new { id });
     }
   }
 }

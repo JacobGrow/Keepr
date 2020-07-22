@@ -1,5 +1,7 @@
 using System;
+using System.Security.Claims;
 using keepr.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Services
@@ -16,10 +18,12 @@ namespace keepr.Services
 
     //Post
     [HttpPost]
+    [Authorize]
     public ActionResult<DTOVaultKeep> Post([FromBody] DTOVaultKeep newDTOVaultKeep)
     {
       try
       {
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         return Ok(_vks.Create(newDTOVaultKeep));
       }
       catch (Exception e)
@@ -30,10 +34,12 @@ namespace keepr.Services
 
     //DEL
     [HttpDelete("{id}")]
+    [Authorize]
     public ActionResult<DTOVaultKeep> Delete(int id)
     {
      try
       {
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         return Ok(_vks.Delete(id));
       }
       catch (Exception e)

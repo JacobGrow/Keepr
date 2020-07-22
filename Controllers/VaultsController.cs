@@ -71,10 +71,12 @@ namespace keepr.Controllers
     }
 
     [HttpGet("{vaultId}/keeps")]
+    [Authorize]
     public ActionResult<IEnumerable<VaultKeep>> GetKeepsByVaultId(int vaultId)
     {
       try
       {
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         return Ok(_vks.GetKeepsByVaultId(vaultId));
       }
       catch (Exception e)
