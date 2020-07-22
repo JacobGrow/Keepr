@@ -38,7 +38,7 @@ namespace keepr.Services
       return exists;
     }
 
-    public IEnumerable<VaultKeep> GetKeepsByVaultId(int id)
+    public IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
     {
         return _repo.GetKeepsByVaultId(id);
     }
