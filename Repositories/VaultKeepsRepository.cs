@@ -1,23 +1,64 @@
 using System;
+using System.Collections.Generic;
+using System.Data;
+using Dapper;
 using keepr.Models;
 
 namespace keepr.Repositories
 {
   public class VaultKeepsRepository
   {
-    internal DTOVaultKeep GetById(int id)
+    private readonly IDbConnection _db;
+    public VaultKeepsRepository(IDbConnection db)
     {
-      throw new NotImplementedException();
+        _db = db;
+    }
+    internal DTOVaultKeep GetById(int Id)
+    {
+      string sql = "SELECT * FROM vaultkeeps WHERE id = @Id";
+      return _db.QueryFirstOrDefault<DTOVaultKeep>(sql, new { Id });
     }
 
-    internal int Create(DTOVaultKeep newVaultKeep)
+    internal int Create(DTOVaultKeep newDTOVaultKeep)
     {
-      throw new NotImplementedException();
+       string sql = @"
+        INSERT INTO tacoingredients
+        (vaultId, keepId)
+        VALUES
+        (@VaultId, @KeepId);
+        SELECT LAST_INSERT_ID();";
+      return _db.ExecuteScalar<int>(sql, newDTOVaultKeep);
     }
 
-    internal void Delete(int id)
+    internal void Delete(int Id)
     {
-      throw new NotImplementedException();
+       string sql = "DELETE FROM vaultkeeps WHERE id = @Id";
+      _db.Execute(sql, new { Id });
+    }
+
+    internal IEnumerable<VaultKeep> GetKeepsByVaultId(int id)
+    {
+        string sql = @"
+        SELECT 
+            k.*
+            vk.id as vaultKeepId
+        FROM vaultkeeps vk
+        INNER JOIN keeps k ON k.id = vk.keepId
+        WHERE(vk.vaultId = @id)";
+        return _db.Query<VaultKeep>(sql, new { id });
     }
   }
 }
+
+// CREATE TABLE tacoingredients(
+//   id int NOT NULL AUTO_INCREMENT,
+//   tacoId int NOT NULL,
+//   ingId int NOT NULL,
+//   PRIMARY KEY(id),
+//   FOREIGN KEY (tacoId)
+//     REFERENCES tacos (id)
+//     ON DELETE CASCADE,
+//   FOREIGN KEY (ingId)
+//     REFERENCES ingredients (id)
+//     ON DELETE CASCADE
+// )

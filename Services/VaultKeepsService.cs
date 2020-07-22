@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using keepr.Models;
 using keepr.Repositories;
 
@@ -30,6 +31,11 @@ namespace keepr.Services
       DTOVaultKeep exists = Get(id);
       _repo.Delete(id);
       return exists;
+    }
+
+    public IEnumerable<VaultKeep> GetKeepsByVaultId(int id)
+    {
+        return _repo.GetKeepsByVaultId(id);
     }
   }
 }
