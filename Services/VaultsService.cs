@@ -36,10 +36,7 @@ namespace keepr.Services
 
     internal Vault Create(Vault newVault)
     {
-       int id = _repo.Create(newVault);
-      newVault.Id = id;
-      return newVault;
-    //  return _repo.Create(newVault);
+     return _repo.Create(newVault);
     }
 
       public Vault Edit(Vault editVault)
