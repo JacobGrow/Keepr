@@ -15,9 +15,11 @@ namespace keepr.Controllers
   public class VaultsController : ControllerBase
   {
     private readonly VaultsService _vs;
-    public VaultsController(VaultsService vs)
+    private readonly VaultKeepsService _vks;
+    public VaultsController(VaultsService vs, VaultKeepsService vks)
     {
       _vs = vs;
+      _vks = vks;
     }
 
   [HttpGet]
@@ -68,18 +70,18 @@ namespace keepr.Controllers
       }
     }
 
-    // [HttpGet("{vaultId}/keeps")]
-    // public ActionResult<IEnumerable<VaultKeep>> GetKeepsByVaultId(int vaultId)
-    // {
-    //   try
-    //   {
-    //     return Ok(_vks.GetIngsByTacoId(vaultId));
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     return BadRequest(e.Message);
-    //   }
-    // }
+    [HttpGet("{vaultId}/keeps")]
+    public ActionResult<IEnumerable<VaultKeep>> GetKeepsByVaultId(int vaultId)
+    {
+      try
+      {
+        return Ok(_vks.GetKeepsByVaultId(vaultId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
 
     //POST
     [HttpPost]

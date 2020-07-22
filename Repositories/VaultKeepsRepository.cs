@@ -22,10 +22,10 @@ namespace keepr.Repositories
     internal int Create(DTOVaultKeep newDTOVaultKeep)
     {
        string sql = @"
-        INSERT INTO tacoingredients
-        (vaultId, keepId)
+        INSERT INTO vaultkeeps
+        (vaultId, keepId, userId)
         VALUES
-        (@VaultId, @KeepId);
+        (@VaultId, @KeepId, @UserId);
         SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newDTOVaultKeep);
     }
