@@ -13,7 +13,7 @@ namespace Keepr.Services
     {
       _repo = repo;
     }
-    public IEnumerable<Keep> GetPublic()
+    public IEnumerable<Keep> Get()
     {
       return _repo.Get();   
     }
@@ -28,6 +28,10 @@ namespace Keepr.Services
       if (foundKeep == null)
       {
         throw new Exception("Invalid Id");
+      }
+      if (foundKeep.IsPrivate)
+      {
+        throw new Exception("This Keep is Private");
       }
       return foundKeep;
     }

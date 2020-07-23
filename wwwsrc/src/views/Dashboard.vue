@@ -38,6 +38,23 @@
 
     <vault v-for="vault in vaults" :key="vault.id" :vaultData="vault"/>
   </div>
+        <div class="row">
+<div class="col text-center">
+    <h1 class="text-center mt-5">Here are your Keeps</h1>
+
+
+
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-12">
+
+<div class="card-columns">
+
+    <keep v-for="keep in keeps" :key="keep.id" :keepData="keep"/>
+  </div>
+</div>
+</div>
 </div>
 </div>
     
@@ -53,6 +70,7 @@
 
 <script>
 import Vault from "@/components/vaultComponent.vue"
+import Keep from "@/components/keepComponent.vue"
 export default {
    name: "Dashboard",
   data()
@@ -67,6 +85,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getVaults");
+    this.$store.dispatch("getUserKeeps");
   },
   computed: {
       user() {
@@ -74,7 +93,10 @@ export default {
     },
     vaults() {
       return this.$store.state.vaults;
-    }
+    },
+     keeps() {
+      return this.$store.state.userKeeps;
+     }
   },
   methods: {
        logout() {
@@ -86,9 +108,11 @@ export default {
     }
   },
   components: {
-   Vault
+   Vault,
+   Keep
   }
-};
+}
 </script>
 
-<style></style>
+<style>
+</style>

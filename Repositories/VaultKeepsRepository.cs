@@ -51,7 +51,7 @@ namespace keepr.Repositories
         INSERT INTO vaultkeeps
         (vaultId, keepId, userId)
         VALUES
-        (@VaultId, @KeepId, @UserId);
+        (@VaultId, @KeepId, @userId);
         SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newDTOVaultKeep);
     }

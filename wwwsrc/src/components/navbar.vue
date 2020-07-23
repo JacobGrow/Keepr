@@ -29,16 +29,7 @@
           :class="{ active: $route.name == 'dashboard' }"
         >
           <router-link class="nav-link mt-3 ml-3" :to="{ name: 'dashboard' }"
-            >My Vaults</router-link
-          >
-        </li>
-         <li
-          class="nav-item"
-          v-if="$auth.isAuthenticated"
-          :class="{ active: $route.name == 'myKeeps' }"
-        >
-          <router-link class="nav-link mt-3 ml-3" :to="{ name: 'myKeeps' }"
-            >My Keeps</router-link
+            >My-Dashboard</router-link
           >
         </li>
       </ul>
