@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using keepr.Models;
+using Keepr.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,18 +18,48 @@ namespace keepr.Services
       _vks = vks;
     }
 
+    [HttpGet]
     public ActionResult<IEnumerable<VaultKeepViewModel>> Get()
         {
             try
             {
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return Ok(_vks.Get(userId));
+                return Ok(_vks.Get());
             }
             catch (System.Exception err)
             {
                 return BadRequest(err.Message);
             }
         }
+    
+    [HttpGet("{id}")]
+    public ActionResult<DTOVaultKeep> GetById(int id)
+    {
+       try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_vks.GetById(id));
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+    }
+
+    [HttpGet("{user}")]
+    [Authorize]
+    public ActionResult<IEnumerable<DTOVaultKeep>> GetVaultKeepsByUser()
+    {
+      try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_vks.GetByUser(userId));
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+    }
 
     //Post
     [HttpPost]
