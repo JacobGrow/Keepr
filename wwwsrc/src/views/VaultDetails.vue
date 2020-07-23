@@ -10,10 +10,11 @@
           </div>
         </div>
         <div class="row justify-content-center">
-          <div class="col-3">
-            <keep v-for="keep in keeps" :key="keep.id" :keepData="keep"/>
-         
+          <div class="card-columns">
+            <vaultKeep v-for="vaultkeep in vaultKeeps" :key="vaultkeep.id" :vaultKeepData="vaultkeep"/>
           </div>
+         
+          
         </div>
       </div>
     </div>
@@ -22,29 +23,32 @@
 
 <script>
 import Vault from "@/components/vaultComponent.vue"
-import Keep from "@/components/keepComponent.vue"
+import VaultKeep from "@/components/vaultKeepComponent.vue"
+
 export default {
   name: "VaultDetails",
   props: ["vaultDetails"],
   mounted() {
     this.$store.dispatch("getActiveVault", this.$route.params.vaultId);
+    this.$store.dispatch("getKeepsByVault", this.$route.params.vaultId);
   },
   computed: {
     vault() {
       return this.$store.state.activeVault;
       console.log(this.activeVault);
     },
-     keeps() {
-      return this.$store.state.userKeeps;
+     vaultKeeps() {
+      return this.$store.state.vaultKeeps;
      }
   },
   methods: {},
   components: {
-    Vault
+    Vault,
+    VaultKeep
   }
 };
 </script>
 
 <style scoped>
-
+.card-columns{ column-count: 5; }
 </style> 
