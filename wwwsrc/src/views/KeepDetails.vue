@@ -34,7 +34,5 @@ export default {
 </script>
 
 <style scoped>
-.card-color {
-  background-color: #b3211c;
-}
+
 </style> 

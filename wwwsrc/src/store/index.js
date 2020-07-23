@@ -20,7 +20,9 @@ export default new Vuex.Store({
     publicKeeps: [],
     userKeeps: [],
     activeKeep: {},
-    vaults: []
+    userVaults: [],
+    vaultKeeps: [],
+    activeVault: {}
   },
   mutations: {
     setKeeps(state, keeps) {
@@ -29,11 +31,17 @@ export default new Vuex.Store({
     setUserKeeps(state, keeps){
       state.userKeeps = keeps;
     },
-    setVaults(state, vaults){
-      state.vaults = vaults;
+    setUserVaults(state, vaults){
+      state.userVaults = vaults;
     },
     setActiveKeep(state, keep){
       state.activeKeep = keep;
+    },
+    setVaultKeeps(state, vaultKeeps){
+      state.vaultKeeps = vaultKeeps
+    },
+    setActiveVault(state, vault){
+      state.activeVault = vault;
     }
   },
   actions: {
@@ -71,6 +79,15 @@ export default new Vuex.Store({
       }
     },
 
+    async getKeepsByVault({ commit }, id) {
+      try {
+        let res = await api.get('vaults/' + id + '/keeps');
+        commit("setVaultKeeps", res.data)
+      } catch (error) {
+        console.error(error)
+      }
+     },
+
     async  addKeep({ dispatch }, newKeep) {
       try {
         let res = await api.post("keeps", newKeep)
@@ -89,11 +106,20 @@ export default new Vuex.Store({
       }
     },
 
-
-    async getVaults({ commit, dispatch }){
+    async addKeepToVault({ commit, dispatch }, newVaultKeep) {
       try {
-        let res = await api.get("vaults");
-        commit("setVaults", res.data)
+          let res = await api.post('vaultkeeps', newVaultKeep)
+          dispatch("getKeepsByVault")
+      } catch (error) {
+          console.error(error)
+      }
+    },
+
+
+    async getUserVaults({ commit, dispatch }){
+      try {
+        let res = await api.get("vaults/user");
+        commit("setUserVaults", res.data)
       } catch (error) {
         console.error(error)
       }
@@ -102,7 +128,7 @@ export default new Vuex.Store({
     async  addVault({ dispatch }, newVault) {
       try {
         let res = await api.post("vaults", newVault)
-        dispatch('getVaults')
+        dispatch('getUserVaults')
       } catch (error) {
         console.error(error)
       }
@@ -110,11 +136,20 @@ export default new Vuex.Store({
   async deleteVault({dispatch}, id){
     try {
       let res = await api.delete("vaults/" + id)
-      dispatch("getVaults")
+      dispatch("getUserVaults")
       console.log("DELORTED")
     } catch (error) {
       console.error(error)
     }
-  }
+  },
+  async getActiveVault ({ commit, dispatch }, vaultId){
+    try{
+    let res = await api.get("vaults/" + vaultId);
+    commit("setActiveVault", res.data)
+    }
+    catch (error){
+      console.error(error)
+    }
+  },
 }
 })

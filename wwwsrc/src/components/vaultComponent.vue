@@ -1,15 +1,17 @@
 <template>
   <div class="vault">
+    <router-link :to="{name: 'vaultDetails', params: {vaultId: vaultData.id}}">
     <div class="card shadow card-size">
       <h5>{{vaultData.name}}</h5>
-      <h5>{{vaultData.description}}</h5>
       <button class="btn btn-danger" @click="deleteVault(vaultData.id)">DELORT</button>
     </div>
+    </router-link>
   </div>
 </template>
 
 
 <script>
+import vaultDetails from "@/views/VaultDetails.vue"
 export default {
    name: "Vault",
   props: ["vaultData"],
@@ -25,6 +27,8 @@ export default {
     vaults() {
       return this.$store.state.vaults;
     }
+  },
+  components: {
   }
 }
 </script>

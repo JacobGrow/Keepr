@@ -1,25 +1,48 @@
 <template>
   <div class="vaultButton">
     
-     <button class="btn btn-secondary form-control my-1">{{vaultButton.name}}</button>
+     <button class="btn btn-primary form-control my-1" @click="addKeepToVault()">{{vaultButton.name}}</button>
     
   </div>
 </template>
 
 
 <script>
+
 export default {
    name: "VaultButton",
   props: ["vaultButton"],
+  data(){
+    return {
+      newVaultKeep: {
+        vaultId: this.vaultButton.id,
+        userId: this.vaultButton.userId,
+        keepId: this.$store.state.activeKeep.id
+
+      }
+    }
+  },
   methods: {
+    addKeepToVault(){
+      this.newVaultKeep = {
+        vaultId: this.vaultButton.id,
+        userId: this.vaultButton.userId,
+        keepId: this.activeKeep.id
+      }
+      this.$store.dispatch("addKeepToVault", this.newVaultKeep) 
+    }
+  },
+  mounted() {
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    },
     vaults() {
-      return this.$store.state.vaults;
+      return this.$store.state.userVaults;
+    },
+    activeKeep() {
+      return this.$store.state.activeKeep
     }
+  },
+  components: {
   }
 }
 </script>

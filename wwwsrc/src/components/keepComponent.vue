@@ -11,7 +11,7 @@
   <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Keep!
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" @click="makeActive">
     <vaultButton v-for="vault in vaults" :key="vault.id" :vaultButton="vault" />
   
    
@@ -31,6 +31,9 @@ export default {
   methods: {
     deleteKeep(keepId) {
       this.$store.dispatch("deleteKeep", keepId);
+    },
+    makeActive(){
+      this.$store.state.activeKeep = this.keepData;
     }
   },
   computed: {
@@ -41,11 +44,11 @@ export default {
       return this.$store.state.publicKeeps;
     },
     vaults() {
-      return this.$store.state.vaults;
+      return this.$store.state.userVaults;
     }
   },
     mounted() {
-      // this.$store.dispatch("getVaults");
+      this.$store.dispatch("getUserVaults");
     },
   components: {
     VaultButton
