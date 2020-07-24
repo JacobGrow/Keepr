@@ -7,7 +7,7 @@
            <img :src= "vaultKeepData.img"/>
             <h5> {{vaultKeepData.description}} </h5>
        
-      <button class="btn btn-danger" >Remove</button>
+      <button class="btn btn-danger" @click="removeVaultKeep(vaultKeepData.vaultKeepId)">Remove</button>
          </div>
              </div>
 </template>
@@ -17,7 +17,16 @@ import Keep from "@/components/keepComponent.vue"
 export default {
   name: "VaultKeep",
   props: ["vaultKeepData"],
+  data(){
+    return {
+      // vaultKeepId: 
+    }
+  },
   methods: {
+    removeVaultKeep(vaultKeepId){
+      event.stopPropagation();
+      this.$store.dispatch("removeVaultKeep", vaultKeepId)
+    }
     },
   mounted() {
     this.$store.dispatch("getKeepsByVault", this.$route.params.vaultId);

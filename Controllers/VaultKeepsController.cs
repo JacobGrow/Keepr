@@ -76,11 +76,39 @@ namespace keepr.Services
         return BadRequest(e.Message);
       }
     }
+    //  [HttpPost]
+    // [Authorize]
+    // public ActionResult<VaultKeepViewModel> Post([FromBody] VaultKeepViewModel newVKViewModel)
+    // {
+    //   try
+    //   {
+    //     string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+    //     return Ok(_vks.Create(newVKViewModel));
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
 
-    //DEL
+    // //DEL
+    // [HttpDelete("{id}")]
+    // [Authorize]
+    // public ActionResult<DTOVaultKeep> Delete(int id)
+    // {
+    //  try
+    //   {
+    //     string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+    //     return Ok(_vks.Delete(id));
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+        //DEL
     [HttpDelete("{id}")]
     [Authorize]
-    public ActionResult<DTOVaultKeep> Delete(int id)
+    public ActionResult<VaultKeepViewModel> Delete(int id)
     {
      try
       {
