@@ -8,6 +8,7 @@
 
 
 <script>
+import Keep from "@/components/keepComponent.vue"
 
 export default {
    name: "VaultButton",
@@ -23,26 +24,29 @@ export default {
     }
   },
   methods: {
-    addKeepToVault(){
+    addKeepToVault(){     
       this.newVaultKeep = {
         vaultId: this.vaultButton.id,
         userId: this.vaultButton.userId,
-        keepId: this.activeKeep.id
+        keepId: this.$store.state.activeKeep.id
       }
       this.$store.dispatch("addKeepToVault", this.newVaultKeep) 
     }
   },
   mounted() {
+    this.$store.dispatch("getActiveKeep", this.$route.params.keepId)
+    this.$store.dispatch(("getUserVaults"))
   },
   computed: {
     vaults() {
       return this.$store.state.userVaults;
     },
-    activeKeep() {
-      return this.$store.state.activeKeep
-    }
+    keep() {
+      return this.$store.state.activeKeep;
+  },
   },
   components: {
+    Keep
   }
 }
 </script>

@@ -1,22 +1,13 @@
 <template>
   <div class="keep">
-    <div class="card shadow card-size">
+    <div class="card shadow card-size" @click="makeActive">
          <router-link :to="{name: 'keepDetails', params: {keepId: keepData.id}}">
       <img :src="keepData.img" />
          </router-link>
       <h5>{{keepData.name}}</h5>
-      <h5>{{keepData.description}}</h5>
+      <p>{{keepData.description}}</p>
        
-<div class="dropdown">
-  <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Keep!
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" @click="makeActive">
-    <vaultButton v-for="vault in vaults" :key="vault.id" :vaultButton="vault" />
-  
-   
-  </div>
-</div>
+
       <button class="btn btn-danger" @click="deleteKeep(keepData.id)">DELORT</button>
     </div>
   </div>
@@ -33,8 +24,9 @@ export default {
       this.$store.dispatch("deleteKeep", keepId);
     },
     makeActive(){
-      this.$store.state.activeKeep = this.keepData;
+      this.$store.dispatch("getActiveKeep")
     }
+   
   },
   computed: {
     user() {

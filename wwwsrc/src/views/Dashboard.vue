@@ -114,5 +114,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.card-columns{ column-count: 4; }
 </style>
