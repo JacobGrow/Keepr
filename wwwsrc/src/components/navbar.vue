@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-red">
+  <nav class="navbar sticky-top shadow navbar-expand-lg navbar-light bg-info">
     <router-link class="navbar-brand" :to="{ name: 'home' }">
-      <h1 class="d-flex mt-3">
+      <h1 class="d-flex my-auto ml-2 pt-2">
       K
       </h1>
       </router-link>
@@ -18,8 +18,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" :class="{ active: $route.name == 'home' }">
-          <router-link :to="{ name: 'home' }" class="nav-link mt-3 ml-3"
+        <li class="nav-item my-auto" :class="{ active: $route.name == 'home' }">
+          <router-link :to="{ name: 'home' }" class="nav-link  ml-1"
             >Home</router-link
           >
         </li>
@@ -28,8 +28,8 @@
           v-if="$auth.isAuthenticated"
           :class="{ active: $route.name == 'dashboard' }"
         >
-          <router-link class="nav-link mt-3 ml-3" :to="{ name: 'dashboard' }"
-            >My-Dashboard</router-link
+          <router-link class="nav-link  my-auto ml-2" :to="{ name: 'dashboard' }"
+            >Dashboard</router-link
           >
         </li>
       </ul>
@@ -41,7 +41,7 @@
         >
           Login
         </button>
-        <button class="btn btn-danger" @click="logout" v-else>logout</button>
+        <button class="btn btn-outline-danger text-white border-white" @click="logout" v-else>logout</button>
       </span>
     </div>
   </nav>
