@@ -53,7 +53,7 @@ namespace Keepr.Services
                     keepToUpdate.Keeps = foundKeep.Keeps;
                     return keepToUpdate;
                 }
-                throw new Exception("Could not bid on that car");
+                throw new Exception("Could not do something");
             }
             if (foundKeep.UserId == userId && _repo.Edit(keepToUpdate, userId))
             {
