@@ -5,7 +5,7 @@
 <div class="col text-center">
     <h1 class="text-center mt-5">Here are your Vaults!</h1>
 
-<button type="button" class="btn btn-primary" @click="showForm=!showForm"> Create a Vault
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vaultModal" @click="showForm=!showForm"> Create a Vault
 </button>
 <div class="row justify-content-center"  v-if="showForm">
   <div class="col-6">
@@ -30,7 +30,7 @@
     </div>
   </div> -->
 
-   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal fade" id="vaultModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -44,18 +44,10 @@
   <div class="row my-1 justify-content-center">
   <input class="form-control form-inline" type="text" placeholder="Title" v-model="newKeep.name" style="width: 93%">
   </div>
-  <div class="row justify-content-center my-1">
-  <input class="form-control" type="text" placeholder="Image URL" v-model="newKeep.img" style="width: 93%"> 
-  </div>
+
   <div class="row justify-content-center my-1">
  <input type="text" class="form-control" placeholder="Description..." v-model="newKeep.description" style="width: 93%">
   </div>
-  <div class="form-check">
-  <input class="form-check-input pb-0" type="checkbox" value="" id="defaultCheck1" v-model="newKeep.isPrivate">
-  <label class="form-check-label" for="defaultCheck1">
-    <p class="mb-0">Private?</p>
-  </label>
-</div>
  
 </form>
       </div>
@@ -66,6 +58,7 @@
     </div>
   </div>
 </div>
+
   </div>
 </div>
 <div class="row mt-3">
