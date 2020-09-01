@@ -5,9 +5,9 @@
 <div class="col text-center">
     <h1 class="text-center mt-5">Here are your Vaults!</h1>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vaultModal" @click="showForm=!showForm"> Create a Vault
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vaultModal" > Create a Vault
 </button>
-<div class="row justify-content-center"  v-if="showForm">
+<div class="row justify-content-center">
   <div class="col-6">
 
 
@@ -42,11 +42,11 @@
       <div class="modal-body justify-content-center">
        <form action="submit" @submit.prevent="addVault">
   <div class="row my-1 justify-content-center">
-  <input class="form-control form-inline" type="text" placeholder="Title" v-model="newKeep.name" style="width: 93%">
+  <input class="form-control form-inline" type="text" placeholder="Title" v-model="newVault.name" style="width: 93%">
   </div>
 
   <div class="row justify-content-center my-1">
- <input type="text" class="form-control" placeholder="Description..." v-model="newKeep.description" style="width: 93%">
+ <input type="text" class="form-control" placeholder="Description..." v-model="newVault.description" style="width: 93%">
   </div>
  
 </form>
@@ -106,7 +106,6 @@ export default {
   data()
   {
     return {
-      showForm: false,
       newVault: {
         name: "",
         description:""

@@ -5,7 +5,7 @@
 <div class="col text-center">
     <h1 class="text-center mt-5">Welcome to Keepr</h1>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" @click="showForm=!showForm"> Make a Keep
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Make a Keep
 </button>
 <div class="row justify-content-center"  v-if="showForm">
   <div class="col-6">
