@@ -40,7 +40,7 @@
         </button>
       </div>
       <div class="modal-body justify-content-center">
-       <form action="submit" @submit.prevent="addVault">
+       <form @submit.prevent="addVault">
   <div class="row my-1 justify-content-center">
   <input class="form-control form-inline" type="text" placeholder="Title" v-model="newVault.name" style="width: 93%">
   </div>
@@ -49,12 +49,12 @@
  <input type="text" class="form-control" placeholder="Description..." v-model="newVault.description" style="width: 93%">
   </div>
  
+      <!-- <div class="modal-footer"> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Post</button>
 </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" @click="addVault">Post</button>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </div>
@@ -134,6 +134,7 @@ export default {
     addVault(){
       this.$store.dispatch("addVault", this.newVault);
       newVault = {};
+      $("#vaultModal").modal("hide");
     }
   },
   components: {
