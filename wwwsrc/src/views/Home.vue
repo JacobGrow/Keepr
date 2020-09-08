@@ -122,6 +122,7 @@ export default {
       this.$store.dispatch("logout");
     },
     addKeep(){
+      $('#exampleModalCenter').modal('hide');
       this.$store.dispatch("addKeep", this.newKeep);
       newKeep = {};
     }
