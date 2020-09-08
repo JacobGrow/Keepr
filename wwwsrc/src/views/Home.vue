@@ -7,7 +7,7 @@
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Make a Keep
 </button>
-<div class="row justify-content-center"  v-if="showForm">
+<div class="row justify-content-center">
   <div class="col-6">
 
 
@@ -65,11 +65,11 @@
   </label>
 </div>
  
-</form>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Post</button>
+      </div>
+</form>
       </div>
     </div>
   </div>
