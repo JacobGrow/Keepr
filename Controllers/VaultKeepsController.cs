@@ -108,12 +108,17 @@ namespace keepr.Services
         //DEL
     [HttpDelete("{id}")]
     [Authorize]
-    public ActionResult<VaultKeepViewModel> Delete(int id)
+    public ActionResult<DTOVaultKeep> Delete(int id)
     {
      try
       {
-        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        return Ok(_vks.Delete(id));
+         var claim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+                string userId = "";
+                if(claim != null){
+                    userId = claim.Value;
+                }
+        // string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_vks.Delete(id, userId));
       }
       catch (Exception e)
       {

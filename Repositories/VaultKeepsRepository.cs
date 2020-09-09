@@ -19,10 +19,10 @@ namespace keepr.Repositories
       string sql = "SELECT * FROM vaultkeeps WHERE userId = @userId";
       return _db.Query<DTOVaultKeep>(sql, new{ userId });
     }
-    internal VaultKeepViewModel GetById(int Id)
+    internal DTOVaultKeep GetById(int id)
     {
-      string sql = "SELECT * FROM vaultkeeps WHERE id = @Id";
-      return _db.QueryFirstOrDefault<VaultKeepViewModel>(sql, new { Id });
+      string sql = "SELECT * FROM vaultkeeps WHERE id = @id";
+      return _db.QueryFirstOrDefault<DTOVaultKeep>(sql, new { id });
     }
 
        internal IEnumerable<VaultKeepViewModel> GetAll()
@@ -67,11 +67,10 @@ namespace keepr.Repositories
     //   return _db.ExecuteScalar<int>(sql, newVKViewModel);
     // }
 
-    internal bool Delete(int Id)
+    internal void Delete(int id, string userId)
     {
-      string sql = "DELETE FROM vaultkeeps WHERE id = @Id AND userId = @UserId LIMIT 1";
-      int affectedRows = _db.Execute(sql, new {Id});
-      return affectedRows == 1;
+      string sql = "DELETE FROM vaultkeeps WHERE id = @id AND userId = @userId LIMIT 1";
+      _db.Execute(sql, new { id, userId});
     }
 
     internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId, string userId)

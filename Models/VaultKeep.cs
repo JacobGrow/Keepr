@@ -14,9 +14,4 @@ namespace keepr.Models
         public string UserId {get; set;}
     }
 
-    public class VaultKeep : DTOVaultKeep
-    {
-        public Vault Vault {get; set;}
-        public Keep Keep {get; set;}
-    }
 }
