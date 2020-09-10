@@ -8,7 +8,7 @@
       <p>{{keepData.description}}</p>
        
 
-      <button class="btn btn-danger" @click="deleteKeep(keepData.id)">DELORT</button>
+      <button class="btn btn-danger" @click="deleteKeep(keepData.id)">Delete</button>
     </div>
   </div>
 </template>

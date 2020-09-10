@@ -8,7 +8,7 @@
     </router-link>
         </div>
       </div>
-      <button class="btn btn-danger" @click="deleteVault(vaultData.id)">DELORT</button>
+      <button class="btn btn-danger" @click="deleteVault(vaultData.id)">Delete</button>
     </div>
   </div>
 </template>
